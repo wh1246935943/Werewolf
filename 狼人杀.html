@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>狼人杀首页</title>
+</head>
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+        /*border: 1px solid red;*/
+        background-image: url(image/bg.png);
+        background-size: cover;
+        background-position: center center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .container .left {
+        width: 20%;
+        height: 100%;
+    }
+
+    .container .left .idImg {
+        width: 100%;
+        height: 120px;
+        text-align: center;
+    }
+
+    .container .left .idImg img {
+        width: 100%;
+        height: 90px;
+        border-radius: 10px;
+    }
+
+    .container .right {
+        width: 20%;
+        height: 100%;
+    }
+
+    .container .right .idImg {
+        width: 100%;
+        height: 120px;
+        text-align: center;
+    }
+
+    .container .right .idImg img {
+        width: 100%;
+        height: 90px;
+        border-radius: 10px;
+    }
+
+    .container .middle {
+        width: 60%;
+        height: 100%;
+        padding-top: 50px;
+    }
+
+    .container .middle .middle-center {
+        width: 100%;
+        height: 47%;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .container .middle .middle-center .middle-center-pic {
+        width: 100%;
+        height: 246px;
+        margin-bottom: 15px;
+    }
+
+    .container .middle .middle-center .middle-center-pic img {
+        width: 100%;
+        height: 257px;
+    }
+
+    .container .middle .middle-center .info {
+        width: 100%;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .container .middle .middle-center .info span:first-child {
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        padding-top: 10px;
+    }
+
+    .container .middle .middle-center .info span:last-child {
+        display: inline-block;
+        width: 100px;
+        height: 40px;
+        padding-top: 10px;
+    }
+
+    .chatArea {
+        width: 100%;
+        height: 49%;
+        padding: 0 20px;
+    }
+
+    #chatAreaInfo {
+        width: 100%;
+        height: 69%;
+        border: 1px solid #999;
+        margin-bottom: 10px;
+    }
+
+    #import {
+        width: 100%;
+        height: 40px;
+        border: none;
+        border-bottom: 1px solid #000;
+        outline: none;
+        background: rgba(0, 0, 0, 0);
+    }
+
+    #send {
+        width: 100%;
+        height: 40px;
+        margin-top: 10px;
+        border: none;
+        outline: none;
+        background: #3891ff;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="left">
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId1"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId2"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId3"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId4"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId5"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId6"
+                                                                                        class="playerName"></span></div>
+    </div>
+
+    <div class="middle">
+        <!--<div id="time"></div>-->
+        <div class="middle-center" id="name">
+            <div class="middle-center-pic">
+                <img id="userImg" src="">
+            </div>
+            <div class="info">
+                <span id="myId"></span>
+                <span id="selfName"></span>
+            </div>
+        </div>
+        <div class="chatArea">
+            <textarea id="chatAreaInfo" readonly="readonly"> </textarea>
+            <input id="import" type="text" placeholder="请输入">
+            <button id="send" onclick="sendMsg()">发送</button>
+        </div>
+    </div>
+
+
+    <div class="right">
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId7"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId8"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId9"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId10"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId11"
+                                                                                        class="playerName"></span></div>
+        <div class="idImg"><img class="aliveImg" src="image/sbg.jpg"><span class="playerId"></span><span id="playerId12"
+                                                                                        class="playerName"></span></div>
+    </div>
+</div>
+
+</body>
+<script src="reconnecting-websocket.js"></script>
+<script src="websocket.js"></script>
+<script>
+    // clientStart("ws://192.168.2.119:8089/websocket");
+    clientStart("ws://bigbug.tech:8080/JavaWebSocket/websocket");
+    var myName = prompt("请输入游戏ID");
+    setTimeout(function () {
+        send({
+            type: "login",
+            data: {
+                name: myName
+            }
+        });
+    }, 500);
+
+    getMessage(function (data) {
+        console.log(data);
+        if (data.type == "start") {
+            var j=0;
+            for (var i = 0; i < data.data.length; i++) {
+                var userName = data.data[i].data.name;
+                console.log(userName);
+                document.getElementById("playerId" +(i+1)).innerHTML = userName;
+                if (userName == myName) {
+                    var userIdentity = data.data[i].data.identity;
+                    document.getElementById("myId").innerHTML = i+1;
+                    document.getElementById("selfName").innerHTML = userName;
+                    if(userIdentity == 'wolf'){
+                    document.getElementById('userImg').src = 'image/room_identity_wolf_n.png';
+                    document.getElementById('verify').style.display = "none";
+                    }else if(userIdentity == 'farmer'){
+                    document.getElementById('userImg').src = 'image/room_identity_villager_n.png';
+                        document.getElementById('verify').style.display = "none";
+                        document.getElementById("murder").style.display = 'none';
+                    }else if(userIdentity == 'hunter'){
+                    document.getElementById('userImg').src = 'image/room_identity_hunter_n.png';
+                        document.getElementById('verify').style.display = "none";
+                        document.getElementById("murder").style.display = 'none';
+                         var button = document.createElement('button');
+                         button.innerHTML = "开枪";
+                         document.getElementsByClassName('bottom')[0].appendChild(button);
+                    }else if(userIdentity == 'prophet'){
+                    document.getElementById('userImg').src = 'image/room_identity_prophet_n.png';
+                        document.getElementById("murder").style.display = 'none';
+                    }else if(userIdentity == 'witch') {
+                        document.getElementById('userImg').src = 'image/room_identity_witch_n.png';
+                        document.getElementById('verify').style.display = "none";
+                        document.getElementById("murder").style.display = 'none';
+                        var button1 = document.createElement('button');
+                    }
+                }
+                else {
+                    var inputClass=j;
+                    j++;
+                }
+                console.log(data);
+            }
+        }
+        if (data.type == "vote") {
+            if(data.voter.indexOf(myName) != -1){
+                var rs =  prompt("请投票",data.votee.join());
+                send({
+                    type:"voteResult",
+                    votee:rs
+                })
+            }
+        }
+        if (data.type == "death"){
+            var users = document.getElementsByClassName("playerName");
+            var userImage = document.getElementsByClassName("aliveImg");
+            for (var i = 0; i < users.length; i++) {
+                if(data.name.info == users[i].innerHTML){
+                    // console.log(data.name.info);
+                    // console.log(users[i].innerHTML);
+                    // console.log(userImage[i]);
+                    userImage[i].src = "image/room_youdead.png";
+                }
+            }
+            
+        }
+        if(data.type == "message"){
+            alert(data.name+"!")
+        }
+        if(data.type == "witchConfirm"){
+            var withchrs =  prompt("请选择解药或者毒药，回复1或者2",data.content);
+            send({
+                type:"witchResult",
+                content:withchrs
+            })
+        }
+        if(data.type == "hunterConfirm"){
+            var hunterrs =  prompt("请选择开枪或者不开枪，回复1或者2",data.content);
+            send({
+                type:"hunterResult",
+                content:hunterrs
+
+            })
+        }
+        if(data.type == "usermessage"){
+            document.getElementById("chatAreaInfo").value+= "\n" +data.data;
+        }
+    });
+    function sendMsg(){
+        send({
+            type:"usermessage",
+            data:myName+":"+document.getElementById("import").value
+        })
+
+        document.getElementById("import").value = ""
+    }
+</script>
+
+</html>

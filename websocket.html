@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="reconnecting-websocket.js"></script>
+    <script src="websocket.js"></script>
+
+</head>
+<body>
+
+</body>
+    <script>
+
+        clientStart("ws://192.168.2.119:8089/websocket");
+        var myName = prompt("name");
+        // setTimeout(function () {
+        //     send()
+        // },500);
+       setTimeout(function(){
+            send({
+                type:"login",
+                data:{
+                   name:myName 
+                }
+            })},2000);
+        
+
+        getMessage(function (data) {
+            console.log(data)
+
+            if (data.type) {
+
+          
+            }
+        });
+
+
+
+
+
+    </script>
+</html>
